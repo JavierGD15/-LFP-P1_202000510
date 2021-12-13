@@ -18,6 +18,7 @@ class AnalizadorLexico:
         estado = 'A'
 
         while indice < len(archivo):
+            
             caracter = archivo[indice]
             
             if estado == 'A':
@@ -123,7 +124,8 @@ class AnalizadorLexico:
 
                 #Caracter de finalización
                 elif caracter == '@':
-                    indice += 100
+                    indice += 10000
+
                 else:
                     self.listError.append(Token_Error('Error lexico', caracter, linea, columna))
                     indice += 1
@@ -189,7 +191,8 @@ class AnalizadorLexico:
                         estado = 'A'
                         indice += 1
                         
-                    indice -= 1
+                    indice -= 1    
+                    
 
             #Analisis de cadenas ""    
             elif estado == 'C':
@@ -237,18 +240,97 @@ class AnalizadorLexico:
                     columna += 1
                     estado = 'E'
                 else:
-                    self.listtoken.append(Token(buffer,'NUMERO', linea, columna))
-                    buffer = ""
-                    estado = 'A'
-                    indice -= 1
-                
-
-
+                    if caracter == ',':                        
+                        
+                        self.listtoken.append(Token(buffer,'NUMERO', linea, columna))
+                        self.listtoken.append(Token(",",'COMA', linea, columna))
+                        buffer = ""
+                        estado = 'A'
+                    else:
+                        self.listtoken.append(Token(buffer,'NUMERO', linea, columna))
+                        buffer = ""
+                        estado = 'A'
+                        indice -= 1     
             indice += 1
+    #analizador sintactico                
+    def analizador_sintactico(self):
+        
+                
+        indice = 0        
+        estado = 'A'
+
+        for caracter in self.listtoken:
+            if estado == 'A':                
+               if caracter.lexema == 'replist' or caracter.tipo == 'REPLIST':
+                    estado = 'B'
+               else:
+                    print("Error sintactico, se esperaba un nombre REPLIST"+caracter.lexema)
+                    break
+            elif estado == 'B':
+                if caracter.lexema == "=":                    
+                    estado = 'C'
+                else:
+                    print("Error sintactico "+caracter.tipo+" se esperaba un ="+caracter.lexema)
+                    break
+            elif estado == 'C':
+                #si es texto cambiar estado
+                if caracter.tipo == 'CADENA':                                    
+                    estado = 'D'
+                else:
+                    print("Error sintactico "+caracter.tipo+" se esperaba un ="+caracter.lexema)
+                    break
+            elif estado == 'D':
+                if caracter.lexema == '=':
+                    estado = 'D'
+                elif caracter.lexema == '>':
+                    estado = 'E'
+                else:
+                    print("Error sintactico "+caracter.tipo+" se esperaba un ="+caracter.lexema)
+                    break
+            elif estado == 'E':
+                if caracter.lexema == '(':
+                    estado = 'F'
+                else:
+                    print("Error sintactico "+caracter.tipo+" se esperaba un numero"+caracter.lexema)
+                    break
+            elif estado == 'F':
+                if caracter.lexema == '{':
+                    estado = 'G'
+                else:
+                    print("Error sintactico "+caracter.tipo+" se esperaba un numero"+caracter.lexema)
+                    break
+
+            elif estado == 'G':
+                if caracter.tipo == 'nombre' or caracter.tipo == 'NOMBRE':
+                    estado = 'H'
+                elif caracter.tipo == 'artista' or caracter.tipo == 'ARTISTA':
+                    estado = 'H'
+                elif caracter.tipo == 'ruta' or caracter.tipo == 'RUTA':
+                    estado = 'H'
+                elif caracter.tipo == 'genero' or caracter.tipo == 'GENERO':
+                    estado = 'H'
+                elif caracter.tipo == 'anio' or caracter.tipo == 'ANIO':
+                    estado = 'H'
+                elif caracter.tipo == 'repetir' or caracter.tipo == 'REPETIR':
+                    estado = 'H'
+
+
+                else:
+                    print("Error sintactico "+caracter.tipo+" se esperaba un numero"+caracter.lexema)
+                    break
+
+
+            else:
+                print("Error Sintactico, no se encontro la secuencia correcta"+caracter.lexema)
+                break
+
+    
+    
+    #Imprimir lista de tokens
     def imprimir(self):
         print("Tokens:")
         for x in self.listtoken:
-            print(x.tipo, x.lexema, x.fila, x.columna)
-        print("Errores:")
-        for x in self.listError:
-             print(x.descripcion, x.tipo, x.fila, x.columna)
+            print( x.lexema)
+        #print("Errores:")
+        #for x in self.listError:
+             #print(x.descripcion, x.tipo, x.fila, x.columna)

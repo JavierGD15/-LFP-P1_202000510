@@ -1,4 +1,4 @@
-replist = 'mi lista de reproducción => (
+replist = 'mi lista de reproducción' => (
 {
     nombre : 'El ataque de las chicas cocodrilo',
     artista : 'Hombres G',

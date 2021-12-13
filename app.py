@@ -10,3 +10,4 @@ if __name__ == "__main__":
     a = AnalizadorLexico()
     a.analizar(leerArchivo("pruebas.txt"))
     a.imprimir()
+    a.analizador_sintactico()
