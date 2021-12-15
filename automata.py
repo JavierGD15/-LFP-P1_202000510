@@ -267,7 +267,7 @@ class AnalizadorLexico:
             for i in self.listtoken:
                 if nombre !="" and artista != "" and ruta != "" and genero != "" and anio != "" and repetir != "":
                     self.lista.append((nombre, artista, ruta, genero, anio, repetir))
-                    #print(self.lista)
+                  
                     nombre = ""
                     artista = ""
                     ruta = ""
@@ -290,10 +290,10 @@ class AnalizadorLexico:
                 
                 else:
                     pass
-            return self.lista    
+              
         else:            
             print("no se pudo analizar el archivo")
-    
+
 
 
     #Imprimir lista de tokens
