@@ -7,7 +7,6 @@ def leerArchivo(ruta):
     return lineas
 
 if __name__ == "__main__":
-    a = AnalizadorLexico()
-    a.analizar(leerArchivo("pruebas.txt"))
-    a.imprimir()
-    a.analizador_sintactico()
+    a = AnalizadorLexico()   
+    a.analizar(leerArchivo("pruebas.txt"))     
+    a.seleccionar()
