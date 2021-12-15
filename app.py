@@ -4,12 +4,19 @@ from tkinter import *
 from tkinter import Button, Label,Tk,filedialog, ttk, Frame, PhotoImage
 from tkinter.font import BOLD 
 from automata import AnalizadorLexico
+from tkinter import Button, Label,Tk,filedialog, ttk, Frame, PhotoImage
+import pygame
+import random
+import mutagen
+#importar mutagen
 
 
 
 
 
 
+
+a = AnalizadorLexico()
 class UI(Frame): 
     #"""Docstring.""" 
     def __init__(self, parent=None): 
@@ -58,15 +65,21 @@ class UI(Frame):
         
 
 def leerArchivo():
+    global direcion, pos, n,cancion_actual
+
+    pos = 0
+    n = 0
+    
     direcion = filedialog.askopenfilename(initialdir ='/', 
 											title='Escoger Tu archivo de entrada', 
 										filetype=(('mt3 files', '*.mt3*'),('All files', '*.*')))
     archivo = open(direcion, 'r')
+    
     lineas = archivo.read()    
     return lineas
 
 def abrir(self):
-    
+    global cancion_actual
     a = AnalizadorLexico()
     a.analizar(leerArchivo())    
     a.seleccionar()
@@ -85,12 +98,35 @@ def abrir(self):
 
     etiqueta_ruta_respuesta = Label(self.parent, text=a.lista[0][2], font=("Arial", 8))
     etiqueta_ruta_respuesta.place(x=200,y=70)
+    cancion_actual = a.lista[0][2]
 
     etiqueta_genero_respuesta = Label(self.parent, text=a.lista[0][3], font=("Arial", 8))
     etiqueta_genero_respuesta.place(x=200,y=100)
 
     etiqueta_anio_respuesta = Label(self.parent, text=a.lista[0][4], font=("Arial", 8))
     etiqueta_anio_respuesta.place(x=200,y=130)
+    pygame.mixer.init()
+
+def iniciar():
+    
+	global cancion_actual
+    
+    
+	pygame.mixer.music.load(cancion_actual)
+    
+	pygame.mixer.music.play()
+	iniciar_reproduccion()
+
+def iniciar_reproduccion():
+	global cancion_actual, direcion, pos, n, actualizar
+    
+	cancion_actual = direcion[pos]
+
+
+	audio = mutagen.File(cancion_actual)	
+	log = audio.info.length
+
+
 
 if __name__ == "__main__":
     ROOT = Tk()
@@ -103,7 +139,7 @@ if __name__ == "__main__":
     imagen5 = PhotoImage(file ='retroceder.png')
     imagen6 = PhotoImage(file ='adelantar.png')
 
-    boton2 = Button(ROOT, image= imagen1 )
+    boton2 = Button(ROOT, image= imagen1 ,command=iniciar)
     boton2.place(x=30,y=500)
 
 

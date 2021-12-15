@@ -2,7 +2,7 @@ replist = 'mi lista de reproducción' => (
 {
     nombre : 'El ataque de las chicas cocodrilo',
     artista : 'Hombres G',
-    ruta : 'C:/musica/El ataque de las chicas cocodrilo.mp3',
+    ruta : 'C:\musica\El ataque de las chicas cocodrilo.mp3',
     genero : 'Rock',
     repetir : 1,
     anio : '2015'
@@ -11,7 +11,7 @@ replist = 'mi lista de reproducción' => (
 {
     nombre : 'El ataque de las chicas cocodrilo',
     artista : 'Hombres G',
-    ruta : 'C:/musica/El ataque de las chicas cocodrilo.mp3',
+    ruta : 'C:\musica\El ataque de las chicas cocodrilo.mp3',
     genero : 'Rock',
     repetir : 1,
     anio : '2015'
@@ -20,7 +20,7 @@ replist = 'mi lista de reproducción' => (
 {
     nombre : 'El ataque de las chicas cocodrilo',
     artista : 'Hombres G',
-    ruta : 'C:/musica/El ataque de las chicas cocodrilo.mp3',
+    ruta : 'C:\musica\El ataque de las chicas cocodrilo.mp3',
     genero : 'Rock',
     repetir : 1,
     anio : '2015'
@@ -29,7 +29,7 @@ replist = 'mi lista de reproducción' => (
 {
     nombre : 'El ataque de las chicas cocodrilo',
     artista : 'Hombres G',
-    ruta : 'C:/musica/El ataque de las chicas cocodrilo.mp3',
+    ruta : 'C:\musica\El ataque de las chicas cocodrilo.mp3',
     genero : 'Rock',
     repetir : 1,
     anio : '2015'
@@ -38,7 +38,7 @@ replist = 'mi lista de reproducción' => (
 {
     nombre : 'El ataque de las chicas cocodrilo',
     artista : 'Hombres G',
-    ruta : 'C:/musica/El ataque de las chicas cocodrilo.mp3',
+    ruta : 'C:\musica\El ataque de las chicas cocodrilo.mp3',
     genero : 'Rock',
     repetir : 1,
     anio : '2015'
@@ -47,7 +47,7 @@ replist = 'mi lista de reproducción' => (
 {
     nombre : 'El ataque de las chicas cocodrilo',
     artista : 'Hombres G',
-    ruta : 'C:/musica/El ataque de las chicas cocodrilo.mp3',
+    ruta : 'C:\musica\El ataque de las chicas cocodrilo.mp3',
     genero : 'Rock',
     repetir : 1,
     anio : '2015'
@@ -56,7 +56,7 @@ replist = 'mi lista de reproducción' => (
 {
     nombre : 'El ataque de las chicas cocodrilo',
     artista : 'Hombres G',
-    ruta : 'C:/musica/El ataque de las chicas cocodrilo.mp3',
+    ruta : 'C:\musica\El ataque de las chicas cocodrilo.mp3',
     genero : 'Rock',
     repetir : 1,
     anio : '2015'
