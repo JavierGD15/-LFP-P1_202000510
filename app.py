@@ -13,7 +13,7 @@ import mutagen
 
 
 
-
+guardar =[]
 
 
 a = AnalizadorLexico()
@@ -57,7 +57,7 @@ class UI(Frame):
 
 
         #BOTONES
-        boton_buscar = Button(self.parent, text="Buscar", command= abrir(self))
+        boton_buscar = Button(self.parent, text="Buscar", command= lambda: abrir(self))
         boton_buscar.place(x=690,y=10)
 
 
@@ -79,7 +79,7 @@ def leerArchivo():
     return lineas
 
 def abrir(self):
-    global cancion_actual
+    global cancion_actual, pos, n,etiqueta_nombre_respuesta, etiqueta_artista_respuesta, etiqueta_ruta_respuesta, etiqueta_genero_respuesta, etiqueta_anio_respuesta
     a = AnalizadorLexico()
     a.analizar(leerArchivo())    
     a.seleccionar()
@@ -90,29 +90,33 @@ def abrir(self):
         etiqueta_anio_respuesta.place(x=830,y=pop)
         pop = pop + 30
 
-    etiqueta_nombre_respuesta = Label(self.parent, text= a.lista[0][0], font=("Arial", 8))
+    #Transferencia de canciones
+    for i in a.lista:
+        guardar.append(i)
+
+    etiqueta_nombre_respuesta = Label(self.parent, text= guardar[pos][0], font=("Arial", 8))
     etiqueta_nombre_respuesta.place(x=200,y=10)     
 
-    etiqueta_artista_respuesta = Label(self.parent, text=a.lista[0][1], font=("Arial", 8))
+    etiqueta_artista_respuesta = Label(self.parent, text=guardar[pos][1], font=("Arial", 8))
     etiqueta_artista_respuesta.place(x=200,y=40)    
 
-    etiqueta_ruta_respuesta = Label(self.parent, text=a.lista[0][2], font=("Arial", 8))
+    etiqueta_ruta_respuesta = Label(self.parent, text=guardar[pos][2], font=("Arial", 8))
     etiqueta_ruta_respuesta.place(x=200,y=70)
-    cancion_actual = a.lista[0][2]
+    cancion_actual = a.lista[pos][2]            
 
-    etiqueta_genero_respuesta = Label(self.parent, text=a.lista[0][3], font=("Arial", 8))
+    etiqueta_genero_respuesta = Label(self.parent, text=guardar[pos][3], font=("Arial", 8))
     etiqueta_genero_respuesta.place(x=200,y=100)
 
-    etiqueta_anio_respuesta = Label(self.parent, text=a.lista[0][4], font=("Arial", 8))
+    etiqueta_anio_respuesta = Label(self.parent, text=guardar[pos][4], font=("Arial", 8))
     etiqueta_anio_respuesta.place(x=200,y=130)
     pygame.mixer.init()
 
 def iniciar():
     
 	global cancion_actual
+            
     
-    
-	pygame.mixer.music.load(cancion_actual)
+	pygame.mixer.music.load(guardar[pos][2])
     
 	pygame.mixer.music.play()
 	iniciar_reproduccion()
@@ -127,6 +131,84 @@ def iniciar_reproduccion():
 	log = audio.info.length
 
 
+def pausa():
+	global actualizar
+	pygame.mixer.music.pause()
+	
+def stop():
+	global actualizar
+	pygame.mixer.music.stop()
+
+def continuar():
+	pygame.mixer.music.unpause()	
+
+def retroceder1():
+	global pos,n
+
+
+	pygame.mixer.music.load(guardar[pos][2])
+    
+	pygame.mixer.music.play()
+	iniciar_reproduccion()	
+
+def adelantar():
+	pygame.mixer.music.load(guardar[pos][2])    
+	pygame.mixer.music.play()
+    
+	iniciar_reproduccion()
+    
+    
+
+#actualizar label
+def retroceder(ROOT):    
+    global cancion_actual, pos, n,etiqueta_nombre_respuesta, etiqueta_artista_respuesta, etiqueta_ruta_respuesta, etiqueta_genero_respuesta, etiqueta_anio_respuesta
+
+    if pos == 0:
+        pos = 0
+    else:
+        pos = pos - 1
+    
+    etiqueta_nombre_respuesta.destroy()
+    etiqueta_artista_respuesta.destroy()
+    etiqueta_ruta_respuesta.destroy()
+    etiqueta_genero_respuesta.destroy()
+    etiqueta_anio_respuesta.destroy()
+    etiqueta_nombre_respuesta = Label(ROOT, text= guardar[pos][0], font=("Arial", 8))
+    etiqueta_nombre_respuesta.place(x=200,y=10)
+    etiqueta_artista_respuesta = Label(ROOT, text=guardar[pos][1], font=("Arial", 8))
+    etiqueta_artista_respuesta.place(x=200,y=40)
+    etiqueta_ruta_respuesta = Label(ROOT, text=guardar[pos][2], font=("Arial", 8))
+    etiqueta_ruta_respuesta.place(x=200,y=70)
+    etiqueta_genero_respuesta = Label(ROOT, text=guardar[pos][3], font=("Arial", 8))
+    etiqueta_genero_respuesta.place(x=200,y=100)
+    etiqueta_anio_respuesta = Label(ROOT, text=guardar[pos][4], font=("Arial", 8))
+    etiqueta_anio_respuesta.place(x=200,y=130)
+    retroceder1()
+
+def actualizar(ROOT):
+    global cancion_actual, pos, n,etiqueta_nombre_respuesta, etiqueta_artista_respuesta, etiqueta_ruta_respuesta, etiqueta_genero_respuesta, etiqueta_anio_respuesta
+
+    if pos == n-1:
+        pos = 0
+    else:
+        pos = pos + 1
+    
+    etiqueta_nombre_respuesta.destroy()
+    etiqueta_artista_respuesta.destroy()
+    etiqueta_ruta_respuesta.destroy()
+    etiqueta_genero_respuesta.destroy()
+    etiqueta_anio_respuesta.destroy()
+    etiqueta_nombre_respuesta = Label(ROOT, text= guardar[pos][0], font=("Arial", 8))
+    etiqueta_nombre_respuesta.place(x=200,y=10)
+    etiqueta_artista_respuesta = Label(ROOT, text=guardar[pos][1], font=("Arial", 8))
+    etiqueta_artista_respuesta.place(x=200,y=40)
+    etiqueta_ruta_respuesta = Label(ROOT, text=guardar[pos][2], font=("Arial", 8))
+    etiqueta_ruta_respuesta.place(x=200,y=70)
+    etiqueta_genero_respuesta = Label(ROOT, text=guardar[pos][3], font=("Arial", 8))
+    etiqueta_genero_respuesta.place(x=200,y=100)
+    etiqueta_anio_respuesta = Label(ROOT, text=guardar[pos][4], font=("Arial", 8))
+    etiqueta_anio_respuesta.place(x=200,y=130)
+    adelantar()    
 
 if __name__ == "__main__":
     ROOT = Tk()
@@ -143,20 +225,22 @@ if __name__ == "__main__":
     boton2.place(x=30,y=500)
 
 
-    boton3 = Button(ROOT,image= imagen2)
+    boton3 = Button(ROOT,image= imagen2, command=stop)
     boton3.place(x=100,y=500)
         
-    boton4 = Button(ROOT,image= imagen3)
+    boton4 = Button(ROOT,image= imagen3, command=pausa)
     boton4.place(x=170,y=500)
         
-    boton5 = Button(ROOT, image= imagen4)
+    boton5 = Button(ROOT, image= imagen4, command=continuar)
     boton5.place(x=240,y=500)
         
-    atras = Button(ROOT, image= imagen5)
+    atras = Button(ROOT, image= imagen5 ,command=lambda:retroceder(ROOT))
     atras.place(x=310,y=500)
        
-    adelante = Button(ROOT, image= imagen6)
+    adelante = Button(ROOT, image= imagen6 ,command=lambda:actualizar(ROOT))
     adelante.place(x=380,y=500)
+
+
     ROOT.geometry("1000x600")
     APP = UI(parent=ROOT)
     APP.mainloop()

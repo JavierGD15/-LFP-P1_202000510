@@ -9,27 +9,18 @@ replist = 'mi lista de reproducción' => (
 
 },
 {
-    nombre : 'El ataque de las chicas cocodrilo',
-    artista : 'Hombres G',
-    ruta : 'C:\musica\El ataque de las chicas cocodrilo.mp3',
+    nombre : 'Fireball',
+    artista : 'Pitbull',
+    ruta : 'C:\musica\Fireball.mp3',
     genero : 'Rock',
     repetir : 1,
-    anio : '2015'
+    anio : '2018'
 
 },
 {
-    nombre : 'El ataque de las chicas cocodrilo',
-    artista : 'Hombres G',
-    ruta : 'C:\musica\El ataque de las chicas cocodrilo.mp3',
-    genero : 'Rock',
-    repetir : 1,
-    anio : '2015'
-
-},
-{
-    nombre : 'El ataque de las chicas cocodrilo',
-    artista : 'Hombres G',
-    ruta : 'C:\musica\El ataque de las chicas cocodrilo.mp3',
+    nombre : 'La Gozadera',
+    artista : 'Marc Anthony',
+    ruta : 'C:\musica\La Gozadera.mp3',
     genero : 'Rock',
     repetir : 1,
     anio : '2015'
