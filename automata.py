@@ -255,6 +255,7 @@ class AnalizadorLexico:
                             
             indice += 1
     def seleccionar(self):
+        
         ayuda = 0
         nombre = ""
         artista = ""
@@ -293,14 +294,24 @@ class AnalizadorLexico:
               
         else:            
             print("no se pudo analizar el archivo")
+        
 
+    def html(self):
+        f = open('ListaTokens.html','w')
+        hola = 7
+        mensaje = """<html>
+        <head></head>        
+        <body><p>%hola%</p></body>
+        </html>"""
 
+        f.write(mensaje)
+        f.close()
 
     #Imprimir lista de tokens
     def imprimir(self):
         print("Tokens:")
         for x in self.listtoken:
-            print( x.lexema)
+            print(x.lexema, x.tipo, x.fila, x.columna)
         print("Errores:")
         for x in self.listError:
              print(x.descripcion, x.tipo, x.fila, x.columna)

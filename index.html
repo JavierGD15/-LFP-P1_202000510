@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Menù con tabs | Html - Css</title>
+    <link rel="stylesheet" href="/static/css/admin.css">
+    
+    
+</head>
+<body>
+    <h2>Tokens</h2>
+                <table style="border-collapse: collapse" bordercolor="#111111" width="900">
+                    <tr>
+                        <th>Lexema</th>
+                        <th>Tipo</th>
+                        <th>Fila</th>
+                        <th>Columna</th>
+
+                    </tr>
+                    {%for us in token%}
+                    <tr>
+                        <td>{{us[0]}}</td>
+                        <td>{{us[1]}}</td>
+                        <td>{{us[2]}}</td>
+                        <td>{{us[3]}}</td>
+                        
+
+                                               
+                       
+                       
+                        
+                        
+                        
+                    </tr>
+                    {%endfor%}
+
+                </table>
+                <br>
+
+
+                <h2>Error tokens</h2>
+                <table style="border-collapse: collapse" bordercolor="#111111" width="900">
+                    <tr>
+                        <th>Descripcion</th>
+                        <th>tipo</th>
+                        <th>fila</th>
+                        <th>columna</th>
+
+                    </tr>
+                    {%for us in images%}
+                    <tr>
+                        <td>Imagen</td>
+                        <td>{{us[0]}}</td>
+                        <td>{{us[1]}}</td>
+                        <td>{{us[2]}}</td>
+                        <td>{{us[3]}}</td>
+
+                    </tr>
+                    {%endfor%}
+
+                </table>
+
+</body>
+</html>
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-
+from flask import Flask, render_template, jsonify, request, redirect, url_for
 from automata import AnalizadorLexico
 from tkinter import *
 from tkinter import Button, Label,Tk,filedialog, ttk, Frame, PhotoImage
@@ -14,7 +14,15 @@ import mutagen
 
 
 guardar =[]
+errores = []
+app = Flask(__name__)
 
+
+#Login inicial
+@app.route('/')
+def index():
+    
+    return render_template('index.html', token = guardar, malos = errores)
 
 a = AnalizadorLexico()
 class UI(Frame): 
@@ -81,7 +89,9 @@ def leerArchivo():
 def abrir(self):
     global cancion_actual, pos, n,etiqueta_nombre_respuesta, etiqueta_artista_respuesta, etiqueta_ruta_respuesta, etiqueta_genero_respuesta, etiqueta_anio_respuesta
     a = AnalizadorLexico()
-    a.analizar(leerArchivo())    
+    a.analizar(leerArchivo())
+    a.imprimir()
+    a.html()    
     a.seleccionar()
     pop=50
 
@@ -94,6 +104,8 @@ def abrir(self):
     for i in a.lista:
         guardar.append(i)
 
+    for i in a.listError:
+        errores.append(i)
     etiqueta_nombre_respuesta = Label(self.parent, text= guardar[pos][0], font=("Arial", 8))
     etiqueta_nombre_respuesta.place(x=200,y=10)     
 
@@ -211,6 +223,7 @@ def actualizar(ROOT):
     adelantar()    
 
 if __name__ == "__main__":
+    
     ROOT = Tk()
     imagen_cancion = PhotoImage(file="fondo.png")
     imagen_cancion_label = Label(ROOT, image=imagen_cancion).place(x=0,y=150)
@@ -245,3 +258,5 @@ if __name__ == "__main__":
     APP = UI(parent=ROOT)
     APP.mainloop()
     ROOT.destroy()
+    app.run(port=5000, debug=False)
+    
